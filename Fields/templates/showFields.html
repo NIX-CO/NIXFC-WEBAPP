@@ -1,0 +1,10 @@
+{% extends 'base/base.html' %}
+{% block content %}
+  <h1>Fields</h1>
+  <ul>
+  {% for field in fields %}
+    <li>{{ field.name }} - {{ field.get_size_display }}</li>
+    <img src="{{ field.image.url }}" alt="{{ field.name }}">
+  {% endfor %}
+  </ul>
+{% endblock %}

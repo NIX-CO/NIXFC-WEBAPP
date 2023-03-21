@@ -1,0 +1,20 @@
+# Ignore all compiled Python files
+*.pyc
+
+# Ignore the virtual environment directory
+venv/
+
+# Ignore Django's default SQLite database file
+db.sqlite3
+
+# Ignore any log files
+*.log
+
+# Ignore local development settings file
+local_settings.py
+
+# Ignore secret key
+*.secret_key
+
+# Ignore migrations
+*/migrations/
