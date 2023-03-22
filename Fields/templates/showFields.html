@@ -1,5 +1,6 @@
 {% extends 'base/base.html' %}
 {% block content %}
+<section id="services">
   <h1>Fields</h1>
   <ul>
   {% for field in fields %}
@@ -7,4 +8,5 @@
     <img src="{{ field.image.url }}" alt="{{ field.name }}">
   {% endfor %}
   </ul>
+</section>
 {% endblock %}
