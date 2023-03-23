@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect,get_object_or_404
 from django.views.decorators.http import require_POST
-from .forms import FieldForm
+from .forms import FieldForm,FieldDeleteForm
 from .models import Field
 # Create your views here.
 
