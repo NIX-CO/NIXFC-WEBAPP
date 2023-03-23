@@ -20,3 +20,5 @@ local_settings.py
 */migrations/
 
 __pycache__/*
+
+/static/base/images/*
