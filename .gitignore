@@ -5,7 +5,7 @@
 venv/
 
 # Ignore Django's default SQLite database file
-db.sqlite3
+db.sqlite3*
 
 # Ignore any log files
 *.log
@@ -18,3 +18,5 @@ local_settings.py
 
 # Ignore migrations
 */migrations/
+
+__pycache__/*

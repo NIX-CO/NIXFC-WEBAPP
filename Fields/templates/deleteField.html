@@ -1,0 +1,14 @@
+{% extends 'base/base.html' %}
+{% block content %}
+<section id="services">
+    <h1>Supprimer un champ</h1>
+    <form method="POST">
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="field_id">ID du champ :</label>
+        <input type="text" class="form-control" id="field_id" name="field_id">
+      </div>
+      <button type="submit" class="btn btn-danger">Supprimer</button>
+    </form>
+</section>
+{% endblock %}
