@@ -14,7 +14,7 @@ def field_update(request, pk):
         form = FieldForm(request.POST, request.FILES, instance=field)
         if form.is_valid():
             form.save()
-            return redirect('field_detail', pk=field.pk)
+            return redirect('/', pk=field.pk)
     else:
         form = FieldForm(instance=field)
     return render(request, 'updateFields.html', {'form': form})
@@ -36,7 +36,7 @@ def delete_field(request):
             field_id = form.cleaned_data['field_id']
             field = get_object_or_404(Field, pk=field_id)
             field.delete()
-            return redirect('home')
+            return redirect('/')
     else:
         form = FieldDeleteForm()
     return render(request, 'deleteField.html', {'form': form})

@@ -18,7 +18,7 @@ def signup(request):
         if form.is_valid():
             user = form.save()
             # Rediriger vers une page de confirmation ou de connexion
-            return redirect('login')
+            return redirect('/')
     else:
         form = CustomUserCreationForm()
     return render(request, 'signup.html', {'form': form})
