@@ -6,6 +6,4 @@ urlpatterns = [
     path('<int:pk>/update/', field_update, name='field_update'),
     path('createfield/', create_field, name='createfield'),
     path('delete/', delete_field, name='deletefield'),
-
-
 ]
