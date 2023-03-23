@@ -40,4 +40,3 @@ def delete_field(request):
     else:
         form = FieldDeleteForm()
     return render(request, 'deleteField.html', {'form': form})
-      
