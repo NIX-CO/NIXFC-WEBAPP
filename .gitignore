@@ -22,3 +22,5 @@ local_settings.py
 __pycache__/*
 
 /static/base/images/*
+
+.idea/*

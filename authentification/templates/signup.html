@@ -1,145 +1,73 @@
-<!-- <!DOCTYPE html>
-<html>
-<head>
-	<title>Ma page stylée</title>
-	<style>
-		body {
-			background-color: #f2f2f2;
-			font-family: Arial, sans-serif;
-			color: #333;
-			margin: 0;
-			padding: 0;
-		}
-
-		h1 {
-			font-size: 3em;
-			color: #333;
-			text-align: center;
-			margin-top: 50px;
-		}
-
-		form {
-			width: 50%;
-			margin: 0 auto;
-			padding: 20px;
-			background-color: #fff;
-			box-shadow: 0 0 10px rgba(0,0,0,0.3);
-			border-radius: 5px;
-		}
-
-		label {
-			display: block;
-			margin-bottom: 5px;
-		}
-
-		input[type="text"], input[type="email"], input[type="password"] {
-			width: 100%;
-			padding: 10px;
-			margin-bottom: 20px;
-			border-radius: 5px;
-			border: 1px solid #ccc;
-			box-sizing: border-box;
-		}
-
-		input[type="submit"] {
-			background-color: #333;
-			color: #fff;
-			border: none;
-			padding: 10px 20px;
-			border-radius: 5px;
-			cursor: pointer;
-		}
-
-		input[type="submit"]:hover {
-			background-color: #555;
-		}
-
-	</style>
-</head>
-<body>
-
-	<h1>Inscription</h1>
-
-	<form>
-		<label for="nom">Nom :</label>
-		<input type="text" id="nom" name="nom">
-
-		<label for="prenom">Prénom :</label>
-		<input type="text" id="prenom" name="prenom">
-
-		<label for="email">Email :</label>
-		<input type="email" id="email" name="email">
-
-		<label for="mdp">Mot de passe :</label>
-		<input type="password" id="mdp" name="mdp">
-
-		<input type="submit" value="S'inscrire">
-	</form>
-
-</body>
-</html> -->
-
-
-
-
-
-
-
-
-
-
 {% extends 'base/base.html' %}
 
 {% load static %}
 {% block content %}
-<section id="section">
-    <h1>Inscription</h1>
-    <form method="post">
-      {% csrf_token %}
-      {{ form.as_p }}
-      <button type="submit">Inscription</button>
+<div class="container col-xxl-3 col-xl-4 col-lg-5 col-md-6 col-sm-7 col-11 mt-6 p-5 border rounded shadow">
+<img src="{% static 'base/assets/img/NIXFC-removebg-preview.png' %}" alt="user" width="250" class="d-block mx-auto mb-5">
+    <form method="post" enctype="multipart/form-data" novalidate>
+        {% csrf_token %}
+        <div class="mb-3">
+            <input type="text" name="username" class="form-control" placeholder="Username" required
+                   value="{{ username }}">
+            {% for error in form.username.errors %}
+                <div class="invalid-feedback" style="display: block">
+                    {{ error }}
+                </div>
+            {% endfor %}
+            <div class="invalid-feedback">
+                Username required.
+            </div>
+        </div>
+        <div class="mb-3">
+            <input type="email" name="email" class="form-control" placeholder="Email" required
+                   value="{{ email }}">
+            {% for error in form.email.errors %}
+                <div class="invalid-feedback" style="display: block">
+                    {{ error }}
+                </div>
+            {% endfor %}
+            <div class="invalid-feedback">
+                Email required.
+            </div>
+        </div>
+        <div class="mb-3">
+            <input type="password" name="password1" class="form-control" placeholder="Password"
+                   required>
+            {% for error in form.password1.errors %}
+                <div class="invalid-feedback" style="display: block">
+                    {{ error }}
+                </div>
+            {% endfor %}
+            <div class="invalid-feedback">
+                Password required.
+            </div>
+        </div>
+        <div class="mb-3">
+            <input type="password" name="password2" class="form-control" placeholder="Confirm password"
+                   required>
+            {% for error in form.password2.errors %}
+                <div class="invalid-feedback" style="display: block">
+                    {{ error }}
+                </div>
+            {% endfor %}
+            <div class="invalid-feedback">
+                Confirm password required.
+            </div>
+        </div>
+        <div class="d-grid gap-2 mt-3">
+            <input type="submit" name="register" value="Register" class="btn btn-success">
+        </div>
     </form>
-</section>
- 
+</div>	
+    <script>
+        const form = document.querySelector('.needs-validation')
+        form.addEventListener('submit', event => {
+            if (!form.checkValidity()) {
+                event.preventDefault()
+                event.stopPropagation()
+            }
+
+            form.classList.add('was-validated')
+        }, false)
+    </script>
 {% endblock %}
-
-
-
-
-
-
-
-
-
-
-
-<!-- <!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-
-<body>
-    {% if form.errors %}
-    <div class="alert alert-warning alert-dismissible fade show" role="alert">
-        There was an error with your form...
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-    <form action="{% url 'signup' %}" method="post">
-        {% endif %}
-        <h1>SignUp</h1>
-        <form action="{% url 'signup' %}" method="post">
-            {% csrf_token %}
-
-            {{form.as_p}}
-            <br><br>
-            <input type="submit" value="submit" class="btn btn-secondary">
-        </form>
-        <br><br>
-</body>
-
-</html> -->
