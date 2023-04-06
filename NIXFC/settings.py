@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'Fields',
     'authentification',
-    'reservation'
+    'reservation',
     'Users',
 ]
 
