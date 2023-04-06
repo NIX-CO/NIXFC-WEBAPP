@@ -5,7 +5,10 @@
   <ul>
   {% for field in fields %}
     <li>{{ field.name }} - {{ field.get_size_display }}</li>
+   
     <img src="{{ field.image.url }}" alt="{{ field.name }}">
+   
+    <button><a href="http://127.0.0.1:8000/reservation/reserver/">reserver</a></button>
    
   {% endfor %}
   </ul>

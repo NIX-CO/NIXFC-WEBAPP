@@ -1,14 +1,49 @@
 {% extends 'base/base.html' %}
-
+{% load static %}
 {% block content %}
-<h1>Liste des réservations</h1>
- {% if Reservation %} 
-<ul>
-  {% for reservations in Reservation %}
-    {{ form.as_p }}
-  {% endfor %}
-</ul>
-{% else %}
-<p>Aucune réservation pour le moment.</p>
-{% endif %}
+<section id="services">
+  <h2>Liste des Reservation</h2>
+
+  <table border=1>
+    <thead>
+      <tr>
+        <th>Fields</th>
+        <th>userName</th>
+        <th>start timee</th>
+        <th>end time</th>
+
+      </tr>
+    </thead>
+
+    <tbody>
+      {% for rsv in reservation %}
+      <tr>
+        <td>{{ rsv.field }}</td>
+        <td>{{ rsv.user }}</td>
+        <td>{{ rsv.start_time }}</td>
+        <td>{{ rsv.end_time }}</td>
+
+
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</section>
+<style>
+  table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+  
+ h2{
+  text-align: center;
+ }
+  </style>
 {% endblock %}
