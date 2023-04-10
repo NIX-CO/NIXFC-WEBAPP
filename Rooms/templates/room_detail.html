@@ -1,0 +1,24 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block content %}
+<section id="services">
+    <h1>Room {{ room.id }}</h1>
+    <p>User: {{ room.user }}</p>
+    <p>Field: {{ room.field }}</p>
+    {% if room.users_list.all %}
+      <p>Users:</p>
+      <ul>
+      {% for user in room.users_list.all %}
+        <li>{{ user }}</li>
+      {% endfor %}
+      </ul>
+    {% endif %}
+    <a href="{% url 'room_edit' room.id %}">Edit Room</a>
+    <a href="{% url 'room_delete' room.id %}">Delete Room</a>
+
+</section>
+
+
+  
+
+{% endblock %}
