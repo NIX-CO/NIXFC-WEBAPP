@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'Fields',
     'authentification',
     'Rooms',
+    'reservation',
+    'Users',
 ]
 
 MIDDLEWARE = [
