@@ -16,3 +16,13 @@ class MatchForm(forms.ModelForm):
         widgets = {
             'date': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
         }
+class MatchDeleteForm(forms.Form):
+    confirm = forms.BooleanField(label='Confirm deletion', required=True)   
+class MatchFilterForm(forms.Form):
+    start_date = forms.DateTimeField()
+    end_date = forms.DateTimeField()
+
+    def filter_matches(self):
+        start_date = self.cleaned_data.get('start_date')
+        end_date = self.cleaned_data.get('end_date')
+        return Match.objects.filter(date__gte=start_date, date__lte=end_date)        
