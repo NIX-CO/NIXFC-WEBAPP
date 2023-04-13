@@ -1,0 +1,53 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+<section id="services">
+  <h2>Liste des Teams</h2>
+<table border=1>
+    <thead>
+      <tr>
+        <th>name</th>
+        <th>date</th>
+        <th>logo</th>
+        <th>number of members</th>
+        <th>city</th>
+        <th>country</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      {% for team in teams %}
+      <tr>
+        <td>{{ team.name }}</td>
+        <td>{{ team.date }}</td>
+        <td><img src="{{ team.logo.url }}" alt="{{ team.name }}"></td>
+        <td>{{ team.number_of_members }}</td>
+        <td>{{ team.city }}</td>
+        <td>{{ team.country }}</td>
+        <td><button><a href="{% url 'add_team' %}">Add Team</a></button></td>
+    
+
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  </section>
+  <style>
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+    }
+    
+    td, th {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+    }
+    
+   h2{
+    text-align: center;
+   }
+    </style>
+  {% endblock %}
