@@ -1,0 +1,64 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block content %}
+<section id="services">
+  <h2>Player List</h2>
+  <a href="{% url 'player_add' %}">Add Player</a>
+  <table border=1>
+    <thead>
+      <tr>
+        <th>Username</th>
+        <th>Email</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>bio</th>
+        <th>weight</th>
+        <th>height</th>
+        <th>position</th>
+        <th>phone</th>
+        <th>photo</th>
+        <th>Action</th>
+      
+      </tr>
+    </thead>
+    <tbody>
+  {% for player in players %}
+    <tr>
+      <td>{{ player.username }}</td>
+      <td>{{ player.email }}</td>
+      <td>{{ player.first_name }}</td>
+      <td>{{ player.last_name }}</td>
+      <td>{{ player.bio }}</td>
+      <td>{{ player.weight }}</td>
+      <td>{{ player.height }}</td>
+      <td>{{ player.position }}</td>
+      <td>{{ player.phone }}</td>
+      <td>
+        <td><img src="{{ player.photo.url }}" width="50" height="50" alt="{{ player.user.username }}'s Photo"></td> 
+      </td>
+      
+      
+      
+    </tr>
+  {% endfor %}
+</tbody>
+</table>
+</section>
+<style>
+  table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+  
+ h2{
+  text-align: center;
+ }
+  </style>
+{% endblock %}
