@@ -2,11 +2,21 @@ from django.shortcuts import render,redirect,get_object_or_404
 from django.views.decorators.http import require_POST
 from .forms import FieldForm,FieldDeleteForm
 from .models import Field
+from .serializers import FieldSerializer
+from rest_framework import generics
+from rest_framework.response import Response
+from rest_framework.decorators import api_view
 # Create your views here.
 
 def field_list(request):
     fields = Field.objects.all()
     return render(request, 'showFields.html', {'fields': fields})
+
+@api_view(['GET'])
+def FieldList(request):
+    fields = Field.objects.all()
+    serializer =FieldSerializer(fields,many=True)
+    return Response(serializer.data)
 
 def field_update(request, pk):
     field = get_object_or_404(Field, pk=pk)
