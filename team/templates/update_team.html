@@ -1,10 +1,78 @@
 {% extends 'base/base.html' %}
 {% block content %}
 <section id="services">
+    <h2>Update team</h2>
 <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">Save</button>
 </form>
 </section>
+<style>
+
+  
+    form {
+      margin: 20px auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      max-width: 500px;
+      margin-top: 50px;
+      display: flex;
+    flex-direction: column;
+    justify-content: center;
+   
+    }
+    
+    
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+    
+    input[type="text"],
+    select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    
+    form label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  form input[type="text"], form select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  h2 { 
+    text-align: center;
+    font-size: 28px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  form button {
+    padding: 10px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+  }
+  
+  form button:hover {
+    background-color: #555;
+  }
+      
+    </style>
 {% endblock %}
