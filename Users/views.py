@@ -4,6 +4,10 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from .forms import ProfileForm
+from .serializiers import UserSerializer
+from rest_framework.response import Response
+from rest_framework.decorators import api_view
+
 #######User Profile
 @login_required
 def profile(request):
@@ -22,6 +26,12 @@ def profile(request):
 def user_list(request):
     users = User.objects.all()
     return render(request, 'Users/user_list.html', {'users': users})
+
+@api_view(['GET'])
+def userlist(request):
+    users = User.objects.all()
+    serializer = UserSerializer(users,many=True)
+    return Response(serializer.data)
 
 ####deleteUserProfile
 
