@@ -8,4 +8,5 @@ class Player(User):
     height = models.FloatField()  # Field for player height
     position = models.CharField(max_length=100,default="")  # Field for player position
     phone = models.CharField(max_length=20,default="")  # Field for player phone
+    
 
