@@ -39,7 +39,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'Fields',
-    'authentification'
+    'authentification',
+    'Rooms',
+    'reservation',
+    'Users',
+    'team',
+    'player',
 ]
 
 MIDDLEWARE = [
