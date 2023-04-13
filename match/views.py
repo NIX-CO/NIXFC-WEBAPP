@@ -24,21 +24,28 @@ def match_delete(request, pk):
         form = MatchDeleteForm()
     return render(request, 'match_delete.html', {'match': match, 'form': form})
 def match_list(request):
-    form = MatchFilterForm(request.GET or None)
     matches = Match.objects.all()
+    context = {'matches': matches}
+    return render(request, 'match_list.html', context)
 
-    if form.is_valid():
-        matches = form.filter_matches()
-
-    context = {'form': form, 'matches': matches}
-    return render(request, 'match_list.html', context)    
+def match_detail(request, pk):
+    match = get_object_or_404(Match, pk=pk)
+    if request.method == 'POST':
+        form = MatchForm(request.POST, instance=match)
+        if form.is_valid():
+            form.save()
+            return redirect('match:match_list')
+    else:
+        form = MatchForm(instance=match)
+    context = {'match': match, 'form': form}
+    return render(request, 'match_detail.html', context)  
 def match_update(request, pk):
     match = get_object_or_404(Match, pk=pk)
     if request.method == 'POST':
         form = MatchForm(request.POST, instance=match)
         if form.is_valid():
             form.save()
-            return redirect('match_list')
+            return redirect('match_list.html')
     else:
         form = MatchForm(instance=match)
     return render(request, 'match_update.html', {'form': form, 'match': match})    
