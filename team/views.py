@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from .forms import TeamForm
+from .models import Team
 
 def add_team(request):
     if request.method == 'POST':
@@ -10,3 +11,8 @@ def add_team(request):
     else:
         form = TeamForm()
     return render(request, 'add_team.html', {'form': form})
+
+def team_list(request):
+    teams = Team.objects.all()
+    return render(request, 'team_list.html', {'teams': teams})
+
