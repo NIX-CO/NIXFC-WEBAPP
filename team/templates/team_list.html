@@ -21,11 +21,15 @@
       <tr>
         <td>{{ team.name }}</td>
         <td>{{ team.date }}</td>
-        <td><img src="{{ team.logo.url }}" alt="{{ team.name }}"></td>
+       
+        <td><img src="{{ team.logo.url }} "width="50" height="50" alt="{{ team.name }}"></td>
         <td>{{ team.number_of_members }}</td>
         <td>{{ team.city }}</td>
         <td>{{ team.country }}</td>
-        <td><button><a href="{% url 'add_team' %}">Add Team</a></button></td>
+        <td><button><a href="{% url 'add_team' %}">Add Team</a></button>
+            <button><a href="{% url 'team_update' team.pk %}">Update</a></button> 
+          
+        </td>
     
 
       </tr>
