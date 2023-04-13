@@ -18,3 +18,15 @@ def player_add(request):
     else:
         form = PlayerForm()
     return render(request, 'player/player_form.html', {'form': form})
+
+@login_required
+def player_update(request, pk):
+    player = get_object_or_404(Player, pk=pk)
+    if request.method == 'POST':
+        form = PlayerForm(request.POST, instance=player)
+        if form.is_valid():
+            form.save()
+            return redirect('player_list')
+    else:
+        form = PlayerForm(instance=player)
+    return render(request, 'player/player_form.html', {'form': form})

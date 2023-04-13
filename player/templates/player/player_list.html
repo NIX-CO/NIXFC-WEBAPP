@@ -34,10 +34,13 @@
       <td>{{ player.position }}</td>
       <td>{{ player.phone }}</td>
       <td>
-        <td><img src="{{ player.photo.url }}" width="50" height="50" alt="{{ player.user.username }}'s Photo"></td> 
+        <td><img src="{{ player.photo.url }}" width="50" height="50" alt="{{ player.username }}"></td> 
       </td>
       
-      
+      <td>
+        <a href="{% url 'player_update' player.pk %}">Edit</a>
+       
+      </td>
       
     </tr>
   {% endfor %}
