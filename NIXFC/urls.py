@@ -26,4 +26,5 @@ urlpatterns = [
     path('reservation/', include('reservation.urls')),
     path('Users/', include('Users.urls')),
     path('player/', include('player.urls')),
+    path('match/', include('match.urls')),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
