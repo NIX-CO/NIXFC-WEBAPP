@@ -29,4 +29,8 @@ def team_update(request, pk):
         form = TeamForm(instance=team)
     return render(request, 'update_team.html', {'form': form})
 
+def team_delete(request, pk):
+    team = get_object_or_404(Team, pk=pk)
+    team.delete()
+    return redirect('team_list')
 
