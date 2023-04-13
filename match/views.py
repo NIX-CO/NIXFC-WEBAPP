@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Match
 from .forms import MatchForm, MatchDeleteForm
+from .models import Match
 
 
 def create_match(request):
@@ -32,3 +32,13 @@ def match_list(request):
 
     context = {'form': form, 'matches': matches}
     return render(request, 'match_list.html', context)    
+def match_update(request, pk):
+    match = get_object_or_404(Match, pk=pk)
+    if request.method == 'POST':
+        form = MatchForm(request.POST, instance=match)
+        if form.is_valid():
+            form.save()
+            return redirect('match_list')
+    else:
+        form = MatchForm(instance=match)
+    return render(request, 'match_update.html', {'form': form, 'match': match})    
