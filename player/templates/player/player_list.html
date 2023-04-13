@@ -17,7 +17,7 @@
         <th>position</th>
         <th>phone</th>
         <th>photo</th>
-        <th>Action</th>
+        
       
       </tr>
     </thead>
@@ -33,13 +33,13 @@
       <td>{{ player.height }}</td>
       <td>{{ player.position }}</td>
       <td>{{ player.phone }}</td>
-      <td>
-        <td><img src="{{ player.photo.url }}" width="50" height="50" alt="{{ player.username }}"></td> 
-      </td>
+      
+      <td><img src="{{ player.photo.url }}" width="50" height="50" alt="{{ player.username }}"></td> 
+      
       
       <td>
         <a href="{% url 'player_update' player.pk %}">Edit</a>
-       
+        <a href="{% url 'player_delete' player.pk %}" onclick="return confirm('Are you sure you want to delete this player?');">Delete</a>  
       </td>
       
     </tr>

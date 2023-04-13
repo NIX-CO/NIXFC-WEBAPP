@@ -30,3 +30,9 @@ def player_update(request, pk):
     else:
         form = PlayerForm(instance=player)
     return render(request, 'player/player_form.html', {'form': form})
+
+@login_required
+def player_delete(request, pk):
+    player = get_object_or_404(Player, pk=pk)
+    player.delete()
+    return redirect('player_list')
