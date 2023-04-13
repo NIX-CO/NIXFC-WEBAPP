@@ -3,40 +3,39 @@
 {% block content %}
 <section id="services">
     <h1>Tous les matchs</h1>
-
-    <form method="get">
-        {{ form.as_p }}
-        <button type="submit">Filtrer</button>
-    </form>
-    
-    {% if matches %}
-        <table>
-            <thead>
-                <tr>
-                    <th>Equipe à domicile</th>
-                    <th>Score à domicile</th>
-                    <th>Equipe à l'extérieur</th>
-                    <th>Score à l'extérieur</th>
-                    <th>Date</th>
-                    <th>Status</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for match in matches %}
-                    <tr>
-                        <td>{{ match.teamhome }}</td>
-                        <td>{{ match.scorehome }}</td>
-                        <td>{{ match.teamaway }}</td>
-                        <td>{{ match.scoreaway }}</td>
-                        <td>{{ match.date }}</td>
-                        <td>{{ match.get_status_display }}</td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    {% else %}
-        <p>Aucun match trouvé.</p>
-    {% endif %}
+    <table>
+      <thead>
+        <tr>
+          <th>Equipe à domicile</th>
+          <th>Equipe à l'extérieur</th>
+          <th>Date</th>
+          <th>Score</th>
+          <th>Statut</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for match in matches %}
+          <tr>
+            <td>{{ match.teamhome }}</td>
+            <td>{{ match.teamaway }}</td>
+            <td>{{ match.date }}</td>
+            <td>{{ match.scorehome }} - {{ match.scoreaway }}</td>
+            <td>{{ match.status }}</td>
+            <td>
+              <form method="post" action="{% url 'match_update' match.pk %}">
+                {% csrf_token %}
+                <input type="submit" value="Modifier">
+              </form>
+              <form method="post" action="{% url 'match_delete' match.pk %}">
+                {% csrf_token %}
+                <input type="submit" value="Supprimer">
+              </form>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
 
 </section>
 
