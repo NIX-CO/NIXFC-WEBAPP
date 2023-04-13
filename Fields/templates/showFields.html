@@ -1,12 +1,33 @@
 {% extends 'base.html' %}
 {% block content %}
 <section id="services">
+  <div class="container mt-5">
   <h1>Fields</h1>
   <ul>
   {% for field in fields %}
-    <li>{{ field.name }} - {{ field.get_size_display }}</li>
-    <img src="{{ field.image.url }}" alt="{{ field.name }}">
+  <div class="flex font-sans">
+    <div class="flex-none w-48 relative">
+    <div class="col-md-5">
+    <img src="{{ field.image.url }}" alt="{{ field.name }}"class="absolute inset-0 w-full h-full object-cover" loading="lazy"/>
+    <form class="flex-auto p-6">
+      <div class="flex flex-wrap">
+        <h1 class="flex-auto text-lg font-semibold text-slate-900">
+          {{ field.name }}
+        </h1>
+        <div class="text-lg font-semibold text-slate-500">
+          640.00 DH
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
   {% endfor %}
   </ul>
+</div>
 </section>
+{% block js %}
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"
+integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+{% endblock %}
 {% endblock %}
