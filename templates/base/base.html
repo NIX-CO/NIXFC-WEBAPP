@@ -11,10 +11,15 @@
     <link rel="stylesheet" href="{% static 'base/assets/fonts/font-awesome.min.css' %}">
     <link rel="stylesheet" href="{% static 'base/assets/css/aos.min.css' %}">
     <link rel="stylesheet" href="{% static 'base/assets/css/baguetteBox.min.css' %}">
+    <link rel="stylesheet" href="{% static 'base/assets/css/styles.css' %}">
+        {% block css %}
+
+        {% endblock %}
     <link rel="icon" type="image/png" href="{% static 'base/assets/img/NIXFC-removebg-preview.png' %}">
     <link rel="stylesheet" href="{% static 'Fields/static/Fields/style/styles.css' %}">
 </head>
 <body id="page-top" data-bs-spy="scroll" data-bs-target="#mainNav" data-bs-offset="57">
+    {% block nav %}
     <nav class="navbar navbar-light navbar-expand-lg fixed-top" id="mainNav">
         <div class="container"><button data-bs-toggle="collapse" data-bs-target="#navbarResponsive" class="navbar-toggler navbar-toggler-right" type="button" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-align-justify"></i></button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
@@ -28,7 +33,7 @@
             </div>
         </div>
     </nav>
-    
+    {% endblock %}
 {% block content %}
 
 {% endblock %}

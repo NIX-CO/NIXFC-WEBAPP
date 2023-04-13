@@ -1,82 +1,38 @@
-{% extends 'base/base.html' %}
+{% extends 'base.html' %}
 {% load static %}
-{% block content %}
-<section id="services">
-<h1>Create Field</h1>
-
-<form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    <label for="name">Name:</label>
-    <input type="text" id="name" name="name" required><br><br>
-    <label for="size">Size:</label>
-    <select id="size" name="size" required>
-        <option value="">Select size</option>
-        <option value="5">Size 5</option>
-        <option value="7">Size 7</option>
-        <option value="11">Size 11</option>
-    </select><br><br>
-    <label for="image">Image:</label>
-    <input type="file" id="image" name="image" accept="image/*" required><br><br>
-    <input type="submit" value="Create Field">
-</form>
-</section>
+{% block css %}
 <style>
-
-  
-form {
-  margin: 20px auto;
-  padding: 20px;
-  border: 1px solid #ccc;
-  max-width: 500px;
-}
-
-label {
-  display: block;
-  font-weight: bold;
-  margin-bottom: 5px;
-}
-
-input[type="text"],
-select {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-input[type="submit"] {
-  background-color: #4CAF50;
-  color: #fff;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-input[type="submit"]:hover {
-  background-color: #3e8e41;
-}
-
-/* Style pour le message d'erreur */
-input:invalid {
-  border-color: red;
-}
-
-input:invalid:focus {
-  border-color: red;
-  box-shadow: none;
-}
-
-/* Style pour le message de validation */
-input:valid {
-  border-color: green;
-}
-
-input:valid:focus {
-  border-color: green;
-  box-shadow: none;
-}
-  
+    body {
+        background-image: url({% static 'Fields/images/bg2-fields.png' %});
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+    }
 </style>
+{% endblock %}
+{% block content %}
+<br>
+<br>
+<br>
+<br>
+    <div class="container col-xxl-7 col-xl-4 col-lg-5 col-md-5 col-sm-6 col-9 mt-3 p-4 border rounded shadow bg-white">
+        <form method="post" enctype="multipart/form-data">
+            <img src="{% static 'Fields/images/add_fields__1_-removebg-preview.png' %}" alt="user" width="300" class="d-block mx-auto">
+            {% csrf_token %}
+            <input type="text" id="name" name="name" required class="form-control" placeholder="name"><br>
+            <div class="btn-group">
+                <select class="form-select " id="size" name="size" required>
+                    <option value="">Select size</option>
+                    <option value="5">5x5</option>
+                    <option value="7">7x7</option>
+                    <option value="11">11x11</option>
+                </select>
+            </div>
+            <br><br>
+            <div class="mb-3">
+                <input class="form-control" type="file" id="formFile">
+            </div>
+            <input type="submit" value="Create Field" class="btn btn-success">
+        </form>
+    </div>
 {% endblock %}

@@ -1,10 +1,24 @@
-{% extends 'base/base.html' %}
+{% extends 'base.html' %}
+{% load static %}
+{% block css %}
+<style>
+    body {
+        background-image: url({% static 'authentification/images/bg1-fields.png' %});
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+    }
+</style>
+{% endblock %}
 {% block content %}
 <section id="services">
 <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Save</button>
+        <div class="container col-xxl-7 col-xl-4 col-lg-5 col-md-6 col-sm-7 col-11 mt-6 p-3 border rounded shadow bg-white">
+            <img src="{% static 'Fields/images/add_fields__2_-removebg-preview.png' %}" alt="user" width="300" class="d-block mx-auto">
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-success">Save</button>
+        </div>
 </form>
 </section>
 {% endblock %}
