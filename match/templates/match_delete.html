@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section id="section">
+    <h1>Delete match "{{ match }}"?</h1>
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Delete</button>
+      <a href="match_list.html">Cancel</a>
+    </form>
+
+</section>
+
+
+
+{% endblock %}

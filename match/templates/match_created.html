@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<section id="services">
+    <h1>Match created!</h1>
+    <p>Team home: {{ match.teamhome }}</p>
+    <p>Team away: {{ match.teamaway }}</p>
+    <p>Score : {{ match.teamhome }} {{ match.scorehome }}-{{ match.scoreaway }} {{ match.teamaway }}</p>
+    <p>Date: {{ match.date|date:"d/m/Y H:i" }}</p>
+    <p>Status: {{ match.status }}</p>
+
+</section>
+
+
+  
+
+{% endblock %}

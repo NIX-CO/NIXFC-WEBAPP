@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section id="section">
+
+    <h1>Match entre {{ match.teamhome }} et {{ match.teamaway }}</h1>
+    <p>Date : {{ match.date }}</p>
+    <p>Score : {{ match.scorehome }} - {{ match.scoreaway }}</p>
+    <p>Statut : {{ match.status }}</p>
+    <form method="post" action="{% url 'match_delete' match.pk %}">
+      {% csrf_token %}
+      <input type="submit" value="Supprimer">
+    </form>
+</section>
+
+
+
+{% endblock %}
