@@ -85,10 +85,18 @@ WSGI_APPLICATION = 'NIXFC.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'nixfc',
+        'USER': 'nix',
+        'PASSWORD': 'Azerty@123',
+        'HOST': 'nix.mysql.database.azure.com',
+        'PORT': '3306',
+        'OPTIONS': {
+            'ssl': {'ssl-ca': '/path/to/BaltimoreCyberTrustRoot.crt.pem'}
+        }
     }
 }
+
 
 
 # Password validation
