@@ -1,10 +1,11 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %} 
+{% block content %}
 <div>
   <h1>{{ field.name }}</h1>
   <p>Size: {{ field.get_size_display }}</p>
   <img src="{{ field.image.url }}" alt="{{ field.name }}" width="300" />
 </div>
-<div id="map" style="height: 500px"></div>
+<div id="map" style="height: 200px"></div>
 {% block js %}
 <script>
   var map;
@@ -23,5 +24,4 @@
   }
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBC7TrnSJ6ZvaNUaspY6zbmOAbrz5PFF04&callback=initMap" async defer></script>
-
 {% endblock %} {% endblock %}
