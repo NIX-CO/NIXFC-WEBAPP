@@ -13,6 +13,8 @@ class Field(models.Model):
     name = models.CharField(max_length=255)
     size = models.CharField(max_length=2, choices=SIZE_CHOICES)
     image = models.ImageField(upload_to='field_images/')
+    latitude = models.DecimalField(max_digits=9, decimal_places=6)
+    longitude = models.DecimalField(max_digits=9, decimal_places=6)
 
     def __str__(self):
         return self.name

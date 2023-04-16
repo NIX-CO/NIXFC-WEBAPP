@@ -19,6 +19,7 @@
         <form method="post" enctype="multipart/form-data">
             <img src="{% static 'Fields/images/add_fields__1_-removebg-preview.png' %}" alt="user" width="300" class="d-block mx-auto">
             {% csrf_token %}
+            {% comment %} {{ form.as_p }} {% endcomment %}
             <input type="text" id="name" name="name" required class="form-control" placeholder="name"><br>
             <div class="btn-group">
                 <select class="form-select " id="size" name="size" required>
@@ -32,6 +33,8 @@
             <div class="mb-3">
                 <input class="form-control" type="file" id="formFile">
             </div>
+            <input type="text" id="longitude" name="longitude" required class="form-control" placeholder="longitude"><br>
+            <input type="text" id="latitude" name="latitude" required class="form-control" placeholder="latitude"><br>
             <input type="submit" value="Create Field" class="btn btn-success">
         </form>
     </div>

@@ -50,3 +50,7 @@ def delete_field(request):
     else:
         form = FieldDeleteForm()
     return render(request, 'deleteField.html', {'form': form})
+
+def field_detail(request, pk):
+    field = get_object_or_404(Field, pk=pk)
+    return render(request, 'showFieldDetails.html', {'field': field})
