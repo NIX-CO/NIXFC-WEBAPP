@@ -1,0 +1,27 @@
+{% extends 'base.html' %} {% block content %}
+<div>
+  <h1>{{ field.name }}</h1>
+  <p>Size: {{ field.get_size_display }}</p>
+  <img src="{{ field.image.url }}" alt="{{ field.name }}" width="300" />
+</div>
+<div id="map" style="height: 500px"></div>
+{% block js %}
+<script>
+  var map;
+
+  function initMap() {
+      map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: {{ field.latitude }}, lng: {{ field.longitude }}},
+          zoom: 15
+      });
+
+      var marker = new google.maps.Marker({
+          position: {lat: {{ field.latitude }}, lng: {{ field.longitude }}},
+          map: map,
+          title: '{{ field.name }}'
+      });
+  }
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBC7TrnSJ6ZvaNUaspY6zbmOAbrz5PFF04&callback=initMap" async defer></script>
+
+{% endblock %} {% endblock %}
