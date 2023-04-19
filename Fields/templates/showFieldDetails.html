@@ -1,11 +1,27 @@
-{% extends 'base/base.html' %} 
-{% block content %}
-<div>
-  <h1>{{ field.name }}</h1>
-  <p>Size: {{ field.get_size_display }}</p>
-  <img src="{{ field.image.url }}" alt="{{ field.name }}" width="300" />
-</div>
-<div id="map" style="height: 200px"></div>
+{% extends 'base/base.html' %} {% block content %}
+<section class="py-5">
+  <div class="container py-5">
+    <div class="reflow-product">
+      <div class="ref-media">
+        <div class="ref-preview">
+          <img style="width:500px;height:400px;" src="{{ field.image.url }}" alt="{{ field.name }}" />
+        </div>
+        <div class="ref-sale-badge">{{ field.get_size_display }}</div>
+      </div>
+      <div class="ref-product-data">
+        <h2 class="ref-name">{{ field.name }}</h2>
+        <strong class="ref-price ref-on-sale"><s class="ref-original-price">1200 MAD</s>640 MAD</strong>
+        <div style="height:270px"></div>
+      </div>
+      <div class = "ref-product-controls">
+        <a class="ref-button" href="http://127.0.0.1:8000/reservation/reserver/">RESERVE</a>
+      </div>
+      <div id="map" style="height: 200px;width:10000px;"></div>
+    </div>
+
+  </div>
+</section>
+
 {% block js %}
 <script>
   var map;
@@ -23,5 +39,9 @@
       });
   }
 </script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBC7TrnSJ6ZvaNUaspY6zbmOAbrz5PFF04&callback=initMap" async defer></script>
+<script
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBC7TrnSJ6ZvaNUaspY6zbmOAbrz5PFF04&callback=initMap"
+  async
+  defer
+></script>
 {% endblock %} {% endblock %}
