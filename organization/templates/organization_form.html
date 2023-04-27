@@ -1,0 +1,35 @@
+{% extends 'base/base.html' %} {% block content %}
+<section>
+  <div
+    class="container col-xxl-7 col-xl-4 col-lg-5 col-md-5 col-sm-6 col-9 mt-3 p-4 border rounded shadow bg-white"
+  >
+    <h2>Create Organization</h2>
+    <hr />
+    <form method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div class="form-group mb-3">
+        <label for="{{ form.name.id_for_label }}">Name</label>
+        {{ form.name }}
+      </div>
+      <div class="form-group mb-3">
+        <label for="{{ form.image.id_for_label }}">Image</label>
+        {{ form.image }}
+      </div>
+      <div class="form-group mb-3">
+        <label for="{{ form.latitude.id_for_label }}">Latitude</label>
+        {{ form.latitude }}
+      </div>
+      <div class="form-group mb-3">
+        <label for="{{ form.longitude.id_for_label }}">Longitude</label>
+        {{ form.longitude }}
+      </div>
+      <div class="mt-4">
+        <button type="submit" class="btn btn-primary">submit</button>
+        <a href="http://127.0.0.1:8000/organization/" class="btn btn-danger"
+          >Cancel</a
+        >
+      </div>
+    </form>
+  </div>
+</section>
+{% endblock %}

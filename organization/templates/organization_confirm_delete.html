@@ -1,0 +1,16 @@
+{% extends 'base/base.html' %} {% block content %}
+<section>
+  <div class="container mt-4">
+    <h2>Confirm Deletion</h2>
+    <hr />
+    <p>Are you sure you want to delete "{{ organization }}"?</p>
+    <form method="POST">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-danger">Yes, delete</button>
+      <a href="http://127.0.0.1:8000/organization/" class="btn btn-secondary"
+        >Cancel</a
+      >
+    </form>
+  </div>
+</section>
+{% endblock %}
