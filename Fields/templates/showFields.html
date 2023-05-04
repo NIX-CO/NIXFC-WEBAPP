@@ -2,6 +2,90 @@
 
 
 {% block content %}
+<section id="services">
+  <header class="text-center  d-flex masthead"
+    style="background-image: url('https://i.pinimg.com/originals/99/6b/49/996b49f71304f7010084babb09939e38.jpg');">
+    <div class="container my-auto">
+      
+      <div class="col-lg-8 mx-auto  shadow ">
+        <div class="card shadow px-5 py-2">
+          <form method="post" action="{% url 'search' %}">
+            {% csrf_token %}
+            <div class="d-flex py-3  px-3 flex-row">
+              <div class="p-2"><label for="start_time">Start time:</label>
+                <input type="datetime-local" class="form-control" id="start_time" name="start_time">
+              </div>
+
+              <br>
+              <div class="p-2"> <label for="end_time">End time:</label>
+                <input class="form-control" type="datetime-local" id="end_time" name="end_time">
+              </div>
+
+              <br>
+
+              <div class="d-flex mt-4">
+                <button class=" btn btn-primary text-white align-self-start "
+                  type="submit">Search</button>&nbsp;&nbsp;
+                <a href="{% url 'show_reserved_fields' %}"
+                  class="btn btn-primary text-white align-self-start">Book now</a>
+              </div>
+            </div>
+          </form>
+
+
+        </div>
+      </div>
+
+    </div>
+  </header>
+
+  <br>
+
+  <br>
+  <div class="container col-xxl-3 col-xl-4 col-lg-5 col-md-6 col-sm-7 col-11 mt-6 p-5 ">
+  </div>
+
+
+  <div class="row">
+    <div class="col-lg-10 mx-auto">
+
+      <h1 class="text-center  fw-bold display-4"><em>All Fields</em></h1>
+    </div>
+  </div>
+  <br>
+  <br>  
+
+
+  <!-- 
+  <form method="post" action="{% url 'search' %}">
+    {% csrf_token %}
+    <label for="start_time">Start time:</label>
+    <input type="datetime-local" id="start_time" name="start_time">
+    <br>
+    <label for="end_time">End time:</label>
+    <input type="datetime-local" id="end_time" name="end_time">
+    <br>
+    <button type="submit">Search</button>
+</form>
+<button><a href="{% url 'show_reserved_fields' %}">Show reserved fields</a></button> -->
+
+  <ul>
+    {% for field in fields %}
+
+
+    <div class="col-lg-3 mx-5 my-4 d-inline-flex shadow ">
+      <div class="card shadow">
+        <img src="{{ field.image.url }} " class="card-img-top img-fluid" alt="Card Image">
+        <div class="card-body d-flex flex-column">
+          <h5 class="card-title fw-bold">{{ field.name }} </h5>
+          <p class="card-text mb-4">{{ field.get_size_display }}</p>
+          <div class="text-lg font-semibold text-slate-500">
+            640.00 DH
+          </div>
+          <br>
+          <a href="http://127.0.0.1:8000/reservation/reserver/"
+            class="btn btn-primary text-white mt-auto align-self-start">Book now</a>
+        </div>
   <style>
       #reserved_fields {display: none;}
       #search {display: none;}
