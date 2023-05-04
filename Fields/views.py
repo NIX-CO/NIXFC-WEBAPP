@@ -65,11 +65,10 @@ def search(request):
         end_time = request.POST.get('end_time')
         reservations = Reservation.objects.filter(start_time__lte=end_time, end_time__gte=start_time)
         fields = Field.objects.exclude(id__in=reservations.values_list('field_id', flat=True))
-        return render(request, 'search_results.html', {'fields': fields})
-    else:
-        return render(request, 'showFields.html')
+        return render(request, 'showFields.html', {'fields': fields})
+
 
 def show_reserved_fields(request):
     reservations = Reservation.objects.all()
     fields = Field.objects.filter(id__in=reservations.values_list('field_id', flat=True))
-    return render(request, 'search_results.html', {'fields': fields})
+    return render(request, 'showFields.html', {'fields': fields})
