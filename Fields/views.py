@@ -5,6 +5,7 @@ from .models import Field
 from reservation.models import Reservation
 from .serializers import FieldSerializer
 from rest_framework import generics
+from django.contrib import messages
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 # Create your views here.
@@ -34,8 +35,12 @@ def create_field(request):
     if request.method == 'POST':
         form = FieldForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
-            return redirect('/')
+            field = form.save(commit=False)
+            field.save()
+            messages.success(request, 'Field created successfully!')
+            return redirect('field_list')
+        else:
+            messages.error(request, 'Error creating field.')
     else:
         form = FieldForm()
     return render(request, 'createField.html', {'form': form})
@@ -67,9 +72,9 @@ def search(request):
         fields = Field.objects.exclude(id__in=reservations.values_list('field_id', flat=True))
         return render(request, 'search_results.html', {'fields': fields})
     else:
-        return render(request, 'showFields.html')
-
+        return render(request, 'showFields.html', {'fields': fields})
 def show_reserved_fields(request):
     reservations = Reservation.objects.all()
     fields = Field.objects.filter(id__in=reservations.values_list('field_id', flat=True))
     return render(request, 'search_results.html', {'fields': fields})
+    return render(request, 'showFields.html', {'fields': fields})
