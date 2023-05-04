@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect,get_object_or_404
 from django.views.decorators.http import require_POST
 from .forms import FieldForm,FieldDeleteForm
 from .models import Field
+from reservation.models import Reservation
 from .serializers import FieldSerializer
 from rest_framework import generics
 from django.contrib import messages
@@ -59,3 +60,20 @@ def delete_field(request):
 def field_detail(request, pk):
     field = get_object_or_404(Field, pk=pk)
     return render(request, 'showFieldDetails.html', {'field': field})
+
+######search
+
+
+def search(request):
+    if request.method == 'POST':
+        start_time = request.POST.get('start_time')
+        end_time = request.POST.get('end_time')
+        reservations = Reservation.objects.filter(start_time__lte=end_time, end_time__gte=start_time)
+        fields = Field.objects.exclude(id__in=reservations.values_list('field_id', flat=True))
+        return render(request, 'showFields.html', {'fields': fields})
+
+
+def show_reserved_fields(request):
+    reservations = Reservation.objects.all()
+    fields = Field.objects.filter(id__in=reservations.values_list('field_id', flat=True))
+    return render(request, 'showFields.html', {'fields': fields})

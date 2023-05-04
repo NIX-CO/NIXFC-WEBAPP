@@ -1,35 +1,133 @@
 {% extends 'base/base.html' %}
+
+
 {% block content %}
-<section id="services">
-  <h1 class="text-center fw-bold display-4"><em>Fields</em></h1>
-  <br>
-  <ul>
-    {% for field in fields %}
+  <style>
+      #reserved_fields {display: none;}
+      #search {display: none;}
+  </style>
+    <section id="services">
+        <div class="container mt-5">
+          <h1>Fields</h1>
+              <form id="search-form" method="post" action="{% url 'search' %}">
+                {% csrf_token %}
+                <label for="start_time">Start time:</label>
+                <input type="datetime-local" id="start_time" name="start_time">
+                <br>
+                <label for="end_time">End time:</label>
+                <input type="datetime-local" id="end_time" name="end_time">
+                <br>
+                <button type="submit" onclick="updateContent()">Search</button>
+              </form>
+              <button onclick="updateContentReservedFields()"><a href="{% url 'show_reserved_fields' %}">Show reserved fields</a></button>
+              <div id="reserved_fields">
+                {% if fields %}
+                    <h1>Fields</h1>
+                    <ul>
+                        {% for field in fields %}
+                          <li>{{ field.name }} - {{ field.get_size_display }}</li>
+                        
+                          <img src="{{ field.image.url }}" alt="{{ field.name }}">
+                        
+                          <button><a href="http://127.0.0.1:8000/reservation/reserver/">reserver</a></button>
+                        
+                        {% endfor %}
+                    </ul>
+                  {% else %}
+                        <h1>All fields are available.</h1>
+                  {% endif %}
 
+              </div>
+              <div id="search">
+                {% if fields %}
+                    <h1>Fields</h1>
+                    <ul>
+                        {% for field in fields %}
+                          <li>{{ field.name }} - {{ field.get_size_display }}</li>
+                        
+                          <img src="{{ field.image.url }}" alt="{{ field.name }}">
+                        
+                          <button><a href="http://127.0.0.1:8000/reservation/reserver/">reserver</a></button>
+                        
+                        {% endfor %}
+                    </ul>
+                  {% else %}
+                        <p>No fields available all the feilds are reserved.</p>
+                  {% endif %}
 
-    <div class="col-lg-3 mx-5 my-4 d-inline-flex shadow ">
-      <div class="card shadow">
-        <img src="{{ field.image.url }} " class="card-img-top img-fluid" alt="Card Image">
-        <div class="card-body d-flex flex-column">
-          <h5 class="card-title fw-bold">{{ field.name }} </h5>
-          <p class="card-text mb-4">{{ field.get_size_display }}</p>
-          <div class="text-lg font-semibold text-slate-500">
-            640.00 DH
-          </div>
-          <br>
-          <a href="#" class="btn btn-primary text-white mt-auto align-self-start">Book now</a>
-        </div>
+              </div>
+              <div id="contenttohide">
+              <ul>
+                {% for field in fields %}
+                <div class="flex font-sans">
+                  <div class="flex-none w-48 relative">
+                  <div class="col-md-5">
+                  <img src="{{ field.image.url }}" alt="{{ field.name }}"class="absolute inset-0 w-full h-full object-cover" loading="lazy"/>
+                  <form class="flex-auto p-6">
+                  <div class="flex flex-wrap">
+                    <h1 class="flex-auto text-lg font-semibold text-slate-900">
+                      {{ field.name }}
+                    </h1>
+                    <div class="text-lg font-semibold text-slate-500">
+                      640.00 DH
+                    </div>
+                    </div>
+                      <button><a href="http://127.0.0.1:8000/reservation/reserver/">reserver</a></button>
+                </form>
+                </div>
+                </div>
+                {% endfor %}
+              </ul>
+            </div>
       </div>
-    </div>
+    </section>
 
-    {% endfor %}
-  </ul>
-</section>
-<style>
-  .card-img-top {
-    width: 100%;
-    height: 20vw;
-    object-fit: cover;
-  }
-</style>
+
+      {% block js %}
+      <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+      <script>
+      $(document).ready(function() {
+        $('#search-form').submit(function(event) {
+          // Prevent the form from submitting
+          event.preventDefault();
+          // Check if the start_time and end_time inputs have values
+          var start_time = $('#start_time').val();
+          var end_time = $('#end_time').val();
+          if (start_time && end_time) {
+            // If both inputs have values, submit the form
+            this.submit();
+          } else {
+            // If either input is empty, show an alert
+            alert('Please choose a start time and end time.');
+          }
+        });
+      });
+
+
+      function updateContent() {
+        fetch('/search/')
+          .then(response => response.text())
+          .then(data => {
+            document.getElementById('search').innerHTML = data;
+            document.getElementById('contenttohide').style.display = 'none';
+            document.getElementById('reserved_fields').style.display = 'none';
+          });
+      }
+
+      function updateContentReservedFields() {
+        fetch('/show_reserved_fields/')
+          .then(response => response.text())
+          .then(data => {
+            document.getElementById('reserved_fields').innerHTML = data;
+            document.getElementById('contenttohide').style.display = 'none';
+            document.getElementById('search').style.display = 'none';
+          });
+      }
+
+
+      </script>
+      {% endblock %}
+
+
 {% endblock %}
