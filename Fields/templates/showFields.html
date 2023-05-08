@@ -5,9 +5,10 @@
 <!-- m -->
 <section id="services" style="background-image: url('https://i.pinimg.com/originals/99/6b/49/996b49f71304f7010084babb09939e38.jpg');        background-repeat: no-repeat;
 background-attachment: fixed;
-background-size: cover;">
+background-size: cover;">     
+
     <div class="container my-auto">
-      <div class="col-lg-8 mx-auto  shadow ">
+      <div class="col-lg-9 mx-auto  shadow ">
         <div class="card shadow px-5 py-2">
           <form id="search-form" method="post" action="{% url 'search' %}">
             {% csrf_token %}
@@ -26,6 +27,11 @@ background-size: cover;">
                 <a onclick="updateContentReservedFields()" href="{% url 'show_reserved_fields' %}"
                   class="btn btn-primary text-white align-self-start">Book
                   now</a>
+                  {% if user.is_authenticated and user.is_staff %}
+<a href="/fields/create/" class="btn btn-primary mb-5"
+  >Create Fields</a
+>
+{% endif %}
               </div>
             </div>
           </form>
@@ -64,6 +70,7 @@ background-size: cover;">
 
   <!-- reserved_fields -->
   <div id="reserved_fields">
+    
     {% if fields %}
     <ul>
       {% for field in fields %}
@@ -116,6 +123,7 @@ background-size: cover;">
     {% else %}
     <p>No fields available.</p>
     {% endif %}
+    
   </div>
   <!-- end contenttohide -->
 
