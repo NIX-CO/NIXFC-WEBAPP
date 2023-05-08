@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'cloudinary_storage',
+    'cloudinary',
     'rest_framework',
     'corsheaders',
     'Fields',
@@ -56,6 +58,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'home',
     'bootstrap4',
+    'django_cleanup.apps.CleanupConfig',
 ]
 
 MIDDLEWARE = [
@@ -90,6 +93,11 @@ TEMPLATES = [
 WSGI_APPLICATION = 'NIXFC.wsgi.application'
 
 
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'dliygn0ek',
+    'API_KEY': '835699315771747',
+    'API_SECRET': 'pG250nq4dfWMN5RHG72v7Mq6a4c'
+}
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
@@ -149,6 +157,7 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS =(os.path.join(BASE_DIR,'static'),)
 MEDIA_ROOT = BASE_DIR / 'static/base/images'
 MEDIA_URL = '/images/'
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 STATIC_ROOT= os.path.join(BASE_DIR,'staticfiles')
 django_heroku.settings(locals())
 # Default primary key field type
