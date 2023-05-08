@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'match',
     'organization',
     'crispy_forms',
+    'home',
     'bootstrap4',
 ]
 
@@ -105,6 +106,8 @@ DATABASES = {
         }
     }
 }
+
+SCM_DO_BUILD_DURING_DEPLOYMENT=True
 
 
 
