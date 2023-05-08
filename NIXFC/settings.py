@@ -61,6 +61,8 @@ INSTALLED_APPS = [
     'django_cleanup.apps.CleanupConfig',
 ]
 
+CSRF_TRUSTED_ORIGINS = ['https://nix-fc.azurewebsites.net/']
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
