@@ -15,7 +15,7 @@ def organization_create(request):
     form = OrganizationForm(request.POST or None, request.FILES or None)
     if form.is_valid():
         form.save()
-        return redirect('organization_list')
+        return redirect('/organization')
     return render(request, 'organization_form.html', {'form': form})
 
 def organization_update(request, pk):
@@ -23,14 +23,14 @@ def organization_update(request, pk):
     form = OrganizationForm(request.POST or None, request.FILES or None, instance=organization)
     if form.is_valid():
         form.save()
-        return redirect('organization_list')
+        return redirect('/organization')
     return render(request, 'organization_form.html', {'form': form})
 
 def organization_delete(request, pk):
     organization = get_object_or_404(Organization, id=pk)
     if request.method == 'POST':
         organization.delete()
-        return redirect('organization_list')
+        return redirect('/organization')
     return render(request, 'organization_confirm_delete.html', {'organization': organization})
 
 def organization_detail(request, pk):

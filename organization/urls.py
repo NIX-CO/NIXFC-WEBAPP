@@ -18,16 +18,16 @@ urlpatterns = [
 
     path('<int:pk>/', organization_detail, name='organization_detail'),
         # List organizations
-    path('api/', api_organization_list, name='organization_list'),
+    path('api/', api_organization_list, name='organization_list_api'),
 
     # Create organization
-    path('api/create/', api_organization_create, name='organization_create'),
+    path('api/create/', api_organization_create, name='organization_create_api'),
 
     # Update organization
-    path('api/<int:pk>/update/', api_organization_update, name='organization_update'),
+    path('api/<int:pk>/update/', api_organization_update, name='organization_update_api'),
 
     # Delete organization
-    path('api/<int:pk>/delete/', api_organization_delete, name='organization_delete'),
+    path('api/<int:pk>/delete/', api_organization_delete, name='organization_delete_api'),
 
-    path('api/<int:pk>/', api_organization_detail, name='organization_detail'),
+    path('api/<int:pk>/', api_organization_detail, name='organization_detail_api'),
 ]
