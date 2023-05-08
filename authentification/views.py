@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .forms import CustomUserCreationForm
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login,logout
+from django.urls import reverse
 # # Create your views here.
 
 def signup(request):
@@ -21,9 +22,13 @@ def login_view(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return render(request, 'login.html')
+            return redirect('/')
         else:
             error_message = 'Invalid username or password'
     else:
         error_message = ''
     return render(request, 'login.html', {'error_message': error_message})
+
+def logout_view(request):
+    logout(request)
+    return redirect(reverse('home'))

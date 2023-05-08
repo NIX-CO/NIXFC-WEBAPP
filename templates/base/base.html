@@ -29,8 +29,14 @@
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link" href="/organization">Organization</a></li>
                     <li class="nav-item"><a class="nav-link" href="/fields">Fields</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/reservation">RSV  a pitch</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/reservation/reserver/">RSV  a pitch</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+                    {% if user.is_authenticated %}
+                        <li class="nav-item"><a class="btn btn-danger" href="/authentification/logout">Logout</a></li>
+                    {% else %}
+                        <li class="nav-item"><a class="btn btn-primary" href="/authentification/login">Login</a></li>
+                        <li class="nav-item"><a class="btn btn-light" href="/authentification/signup">Signup</a></li>
+                    {% endif %}
                 </ul>
             </div>
         </div>
