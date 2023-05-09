@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     'organization',
     'crispy_forms',
     'home',
+    'feeds',
     'bootstrap4',
     'django_cleanup.apps.CleanupConfig',
 ]
