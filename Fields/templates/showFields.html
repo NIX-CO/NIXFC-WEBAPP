@@ -5,39 +5,37 @@
 <!-- m -->
 <section id="services" style="background-image: url('https://i.pinimg.com/originals/99/6b/49/996b49f71304f7010084babb09939e38.jpg');        background-repeat: no-repeat;
 background-attachment: fixed;
-background-size: cover;">     
+background-size: cover;">
 
-    <div class="container my-auto">
-      <div class="col-lg-9 mx-auto  shadow ">
-        <div class="card shadow px-5 py-2">
-          <form id="search-form" method="post" action="{% url 'search' %}">
-            {% csrf_token %}
-            <div class="d-flex py-3  px-3 flex-row">
-              <div class="p-2"><label for="start_time">Start time:</label>
-                <input type="datetime-local" class="form-control" id="start_time" name="start_time">
-              </div>
-              <br>
-              <div class="p-2"> <label for="end_time">End time:</label>
-                <input class="form-control" type="datetime-local" id="end_time" name="end_time">
-              </div>
-              <br>
-              <div class="d-flex mt-4">
-                <button class=" btn btn-primary text-white align-self-start " onclick="updateContent()"
-                  type="submit">Search</button>&nbsp;&nbsp;
-                <a onclick="updateContentReservedFields()" href="{% url 'show_reserved_fields' %}"
-                  class="btn btn-primary text-white align-self-start">Book
-                  now</a>
-                  {% if user.is_authenticated and user.is_staff %}
-<a href="/fields/create/" class="btn btn-primary mb-5"
-  >Create Fields</a
->
-{% endif %}
-              </div>
+  <div class="container my-auto">
+    <div class="col-lg-9 mx-auto  shadow ">
+      <div class="card shadow px-5 py-2">
+        <form id="search-form" method="post" action="{% url 'search' %}">
+          {% csrf_token %}
+          <div class="d-flex py-3  px-3 flex-row">
+            <div class="p-2"><label for="start_time">Start time:</label>
+              <input type="datetime-local" class="form-control" id="start_time" name="start_time">
             </div>
-          </form>
-        </div>
+            <br>
+            <div class="p-2"> <label for="end_time">End time:</label>
+              <input class="form-control" type="datetime-local" id="end_time" name="end_time">
+            </div>
+            <br>
+            <div class="d-flex mt-4">
+              <button class="btn btn-primary text-white align-self-start" onclick="updateContent()" type="submit">Search</button>&nbsp;&nbsp;
+              {% if user.is_authenticated %}
+              <a class="btn btn-primary text-white align-self-start" href="{% url 'my_reservation' %}" onclick="showReservation()"> My reservation</a>
+              {% endif %}
+              <a onclick="updateContentReservedFields()" href="{% url 'show_reserved_fields' %}" class="btn btn-primary text-white align-self-start">Book now</a>
+              {% if user.is_authenticated and user.is_staff %}
+              <a href="/fields/create/" class="btn btn-primary mb-5">Create Fields</a>
+              {% endif %}
+            </div>
+          </div>
+        </form>
       </div>
     </div>
+  </div>
   <!-- end m -->
   <!-- search -->
   <div id="search">
@@ -49,15 +47,14 @@ background-size: cover;">
           <img src="{{ field.image.url }} " class="card-img-top img-fluid" alt="Card Image">
           <div class="card-body d-flex flex-column">
             <a href="/fields/{{ field.id }}/">
-            <h5 class="card-title fw-bold">{{ field.name }} </h5>
-            <p class="card-text mb-4">{{ field.get_size_display }}</p>
-            <div class="text-lg font-semibold text-slate-500">
-              640.00 DH
-            </div>
-          </a>
+              <h5 class="card-title fw-bold">{{ field.name }} </h5>
+              <p class="card-text mb-4">{{ field.get_size_display }}</p>
+              <div class="text-lg font-semibold text-slate-500">
+                640.00 DH
+              </div>
+            </a>
             <br>
-            <a href="/reservation/reserver/"
-              class="btn btn-primary text-white mt-auto align-self-start">Book now</a>
+            <a href="/reservation/reserver/" class="btn btn-primary text-white mt-auto align-self-start">Book now</a>
 
           </div>
         </div>
@@ -70,10 +67,7 @@ background-size: cover;">
     {% endif %}
   </div>
   <!-- end search -->
-
-  <!-- reserved_fields -->
-  <div id="reserved_fields">
-    
+  <div id="my_reservation">
     {% if fields %}
     <ul>
       {% for field in fields %}
@@ -82,14 +76,43 @@ background-size: cover;">
           <img src="{{ field.image.url }} " class="card-img-top img-fluid" alt="Card Image">
           <div class="card-body d-flex flex-column">
             <a href="/fields/{{ field.id }}/">
-            <h5 class="card-title fw-bold">{{ field.name }} </h5>
-            <p class="card-text mb-4">{{ field.get_size_display }}</p>
-            <div class="text-lg font-semibold text-slate-500">
-              640.00 DH
-            </div>          </a>
+              <h5 class="card-title fw-bold">{{ field.name }} </h5>
+              <p class="card-text mb-4">{{ field.get_size_display }}</p>
+              <div class="text-lg font-semibold text-slate-500">
+                640.00 DH
+              </div>
+            </a>
+           
+          </div>
+        </div>
+      </div>
+
+      {% endfor %}
+    </ul>
+    {% else %}
+    <p>No fields available.</p>
+    {% endif %}
+  </div>
+  <!-- reserved_fields -->
+  <!-- reserved_fields -->
+  <div id="reserved_fields">
+
+    {% if fields %}
+    <ul>
+      {% for field in fields %}
+      <div class="col-lg-3 mx-5 my-4 d-inline-flex shadow ">
+        <div class="card shadow">
+          <img src="{{ field.image.url }} " class="card-img-top img-fluid" alt="Card Image">
+          <div class="card-body d-flex flex-column">
+            <a href="/fields/{{ field.id }}/">
+              <h5 class="card-title fw-bold">{{ field.name }} </h5>
+              <p class="card-text mb-4">{{ field.get_size_display }}</p>
+              <div class="text-lg font-semibold text-slate-500">
+                640.00 DH
+              </div>
+            </a>
             <br>
-            <a href="/reservation/reserver/"
-              class="btn btn-primary text-white mt-auto align-self-start">Book now</a>
+            <a href="/reservation/reserver/" class="btn btn-primary text-white mt-auto align-self-start">Book now</a>
 
           </div>
         </div>
@@ -102,6 +125,7 @@ background-size: cover;">
     {% endif %}
   </div>
   <!-- end reserved_fields -->
+  <!-- end reserved_fields -->
   <!-- contenttohide -->
   <div id="contenttohide">
     {% if fields %}
@@ -112,15 +136,14 @@ background-size: cover;">
           <img src="{{ field.image.url }} " class="card-img-top img-fluid" alt="Card Image">
           <div class="card-body d-flex flex-column">
             <a href="/fields/{{ field.id }}/">
-            <h5 class="card-title fw-bold">{{ field.name }} </h5>
-            <p class="card-text mb-4">{{ field.get_size_display }}</p>
-            <div class="text-lg font-semibold text-slate-500">
-              640.00 DH
-            </div>
-          </a>
+              <h5 class="card-title fw-bold">{{ field.name }} </h5>
+              <p class="card-text mb-4">{{ field.get_size_display }}</p>
+              <div class="text-lg font-semibold text-slate-500">
+                640.00 DH
+              </div>
+            </a>
             <br>
-            <a href="/reservation/reserver/"
-              class="btn btn-primary text-white mt-auto align-self-start">Book now</a>
+            <a href="/reservation/reserver/" class="btn btn-primary text-white mt-auto align-self-start">Book now</a>
           </div>
         </div>
       </div>
@@ -130,67 +153,89 @@ background-size: cover;">
     {% else %}
     <p>No fields available.</p>
     {% endif %}
-    
+
   </div>
   <!-- end contenttohide -->
 
 
-</header>
+  </header>
 
 
-{% block js %}
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"
-  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-<script>
-  $(document).ready(function () {
-    $('#search-form').submit(function (event) {
-      // Prevent the form from submitting
-      event.preventDefault();
-      // Check if the start_time and end_time inputs have values
-      var start_time = $('#start_time').val();
-      var end_time = $('#end_time').val();
-      if (start_time && end_time) {
-        // If both inputs have values, submit the form
-        this.submit();
-      } else {
-        // If either input is empty, show an alert
-        alert('Please choose a start time and end time.');
-      }
+  {% block js %}
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script>
+    $(document).ready(function () {
+      $('#search-form').submit(function (event) {
+        // Prevent the form from submitting
+        event.preventDefault();
+        // Check if the start_time and end_time inputs have values
+        var start_time = $('#start_time').val();
+        var end_time = $('#end_time').val();
+        if (start_time && end_time) {
+          // If both inputs have values, submit the form
+          this.submit();
+        } else {
+          // If either input is empty, show an alert
+          alert('Please choose a start time and end time.');
+        }
+      });
     });
-  });
 
 
-  function updateContent() {
-    fetch('/search/')
-      .then(response => response.text())
-      .then(data => {
-        document.getElementById('search').innerHTML = data;
-      });
-  }
+    function updateContent() {
+      fetch('/search/')
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById('my_reservation').style.display = 'none'; // hide the search results
+      document.getElementById('reserved_fields').style.display = 'none'; // hide the reserved fields
+      document.getElementById('contenttohide').style.display = 'none'; // hide the content to hide
+          document.getElementById('search').innerHTML = data;
+        });
+    }
 
-  function updateContentReservedFields() {
-    fetch('/show_reserved_fields/')
-      .then(response => response.text())
-      .then(data => {
-        document.getElementById('reserved_fields').innerHTML = data;
-      });
-  }
-</script>
-{% endblock %}
-<style>
-  #reserved_fields {
-    display: none;
-  }
 
-  #search {
-    display: none;
-  }
 
-  .card-img-top {
-    width: 100%;
-    height: 20vw;
-    object-fit: cover;
-  }
-</style>
+    function showMyReservation() {
+  fetch('/my_reservation/')
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById('search').style.display = 'none'; // hide the search results
+      document.getElementById('reserved_fields').style.display = 'none'; // hide the reserved fields
+      document.getElementById('contenttohide').style.display = 'none'; // hide the content to hide
+      document.getElementById('my_reservation').style.display = 'block'; // show the reserved fields for the connected user
+      document.getElementById('my_reservation').innerHTML = data; // replace the contents of the div with the list of reserved fields
+    });
+}
 
-{% endblock %}
+    function updateContentReservedFields() {
+      fetch('/show_reserved_fields/')
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById('search').style.display = 'none'; // hide the search results
+      document.getElementById('my_reservation').style.display = 'none'; // hide the reserved fields
+      document.getElementById('contenttohide').style.display = 'none'; // hide the content to hide
+          document.getElementById('reserved_fields').innerHTML = data;
+        });
+    }
+  </script>
+  {% endblock %}
+  <style>
+    #reserved_fields {
+      display: none;
+    }
+
+    #search {
+      display: none;
+    }
+    #my_reservation {
+      display: none;
+    }
+    .card-img-top {
+      width: 100%;
+      height: 20vw;
+      object-fit: cover;
+    }
+  </style>
+
+  {% endblock %}

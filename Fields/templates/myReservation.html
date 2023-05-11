@@ -1,0 +1,12 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+    <h1>My Reserved Fields</h1>
+    <ul>
+        {% for field in fields %}
+            <li>{{ field.name }}</li>
+        {% empty %}
+            <li>No fields reserved.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

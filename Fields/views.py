@@ -8,6 +8,7 @@ from rest_framework import generics
 from django.contrib import messages
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 def field_list(request):
@@ -77,4 +78,10 @@ def show_reserved_fields(request):
     reservations = Reservation.objects.all()
     fields = Field.objects.filter(id__in=reservations.values_list('field_id', flat=True))
     # return render(request, 'search_results.html', {'fields': fields})
+    return render(request, 'showFields.html', {'fields': fields})
+
+
+def my_reservation(request):
+    reservations = Reservation.objects.filter(user=request.user)
+    fields = [reservation.field for reservation in reservations]
     return render(request, 'showFields.html', {'fields': fields})
