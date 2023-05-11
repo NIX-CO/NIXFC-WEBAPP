@@ -47,3 +47,16 @@
  }
   </style>
 {% endblock %}
+{% block js %}
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.17/dist/sweetalert2.all.min.js"
+        integrity="sha256-RhRrbx+dLJ7yhikmlbEyQjEaFMSutv6AzLv3m6mQ6PQ=" crossorigin="anonymous"></script>
+{% if message %}
+    <script>
+        Swal.fire({
+            icon: 'success',
+            confirmButtonColor: '#6c757d',
+            text: '{{ message }}',
+        });
+    </script>
+{% endif %}
+{% endblock %}
