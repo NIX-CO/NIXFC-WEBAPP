@@ -9,6 +9,17 @@ from django.contrib import messages
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+from django.shortcuts import get_object_or_404
+from rest_framework.views import APIView
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAuthenticated
+from .models import Field
+from reservation.models import Reservation
+from .serializers import FieldSerializer
 # Create your views here.
 
 def field_list(request):
@@ -80,8 +91,41 @@ def show_reserved_fields(request):
     # return render(request, 'search_results.html', {'fields': fields})
     return render(request, 'showFields.html', {'fields': fields})
 
-
+@login_required
 def my_reservation(request):
     reservations = Reservation.objects.filter(user=request.user)
     fields = [reservation.field for reservation in reservations]
-    return render(request, 'showFields.html', {'fields': fields})
+    return render(request, 'myReservation.html', {'fields': fields})
+
+
+class SearchAPIView(APIView):
+    @csrf_exempt
+    def post(self, request):
+        start_time = request.data.get('start_time')
+        end_time = request.data.get('end_time')
+        reservations = Reservation.objects.filter(start_time__lte=end_time, end_time__gte=start_time)
+        fields = Field.objects.exclude(id__in=reservations.values_list('field_id', flat=True))
+        serializer = FieldSerializer(fields, many=True)
+        return JsonResponse(serializer.data, safe=False)
+
+    def get(self, request):
+        messages.success(request, 'There are no available fields!')
+        return JsonResponse([], safe=False)
+
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def show_reserved_fields(request):
+    reservations = Reservation.objects.all()
+    fields = Field.objects.filter(id__in=reservations.values_list('field_id', flat=True))
+    serializer = FieldSerializer(fields, many=True)
+    return JsonResponse(serializer.data, safe=False)
+
+
+@login_required
+@api_view(['GET'])
+def my_reservation(request):
+    reservations = Reservation.objects.filter(user=request.user)
+    fields = [reservation.field for reservation in reservations]
+    serializer = FieldSerializer(fields, many=True)
+    return JsonResponse(serializer.data, safe=False)
