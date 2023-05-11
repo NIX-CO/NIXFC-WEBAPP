@@ -29,3 +29,22 @@ def reserver_terrain(request):
 def liste_r(request):
     reservation_list = Reservation.objects.all()
     return render(request, 'ListReservation.html', {'reservation': reservation_list})
+
+
+@api_view(['POST'])
+def reserver_terrain_api(request):
+    if request.method == 'POST':
+        form = ReservationForm(request.POST)
+        if form.is_valid():
+            reservation = form.save(commit=False)
+            reservation.user = request.user
+            reservation.save()
+            return Response({'success': True, 'message': 'Reservation created successfully'})
+        else:
+            return Response({'success': False, 'errors': form.errors})
+
+@api_view(['GET'])
+def liste_r_api(request):
+    reservations = Reservation.objects.all()
+    serializer = ReservationSerializer(reservations, many=True)
+    return Response(serializer.data)
