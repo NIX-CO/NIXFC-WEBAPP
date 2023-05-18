@@ -15,7 +15,12 @@
     <link rel="stylesheet" href="{% static 'base/assets/css/baguetteBox.min.css' %}">
     <link rel="stylesheet" href="{% static 'base/assets/css/styles.css' %}">
         {% block css %}
-
+            <style>  body {
+                background-image: url('https://images.pexels.com/photos/3684122/pexels-photo-3684122.jpeg?auto=compress&cs=tinysrgb&w=600');
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+                background-size: cover;
+            }</style>
         {% endblock %}
     <link rel="icon" type="image/png" href="{% static 'base/assets/img/NIXFC-removebg-preview.png' %}">
     <link rel="stylesheet" href="{% static 'Fields/static/Fields/style/styles.css' %}">

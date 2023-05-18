@@ -1,6 +1,9 @@
 {% extends 'base/base.html' %} {% block content %}
 <section>
   <div class="container mt-4">
+    <div class="container my-auto">
+      <div class="col-lg-9 mx-auto  shadow ">
+        <div class="card shadow px-5 py-2">
     <h2>Confirm Deletion</h2>
     <hr />
     <p>Are you sure you want to delete "{{ organization }}"?</p>
@@ -11,6 +14,9 @@
         >Cancel</a
       >
     </form>
+  </div>
+</div>
+</div>
   </div>
 </section>
 {% endblock %}
