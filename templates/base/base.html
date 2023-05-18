@@ -31,6 +31,9 @@
                     <li class="nav-item"><a class="nav-link" href="/fields">Fields</a></li>
                     <li class="nav-item"><a class="nav-link" href="/reservation/reserver/">RSV  a pitch</a></li>
                     <li class="nav-item"><a class="nav-link" href="/feed">Feed</a></li>
+                    {% if user.is_authenticated and user.is_staff %}
+                    <li class="nav-item"><a class="nav-link" href="/reservation/listeRsv/">all reservations</a></li>
+                {% endif %}
                     {% if user.is_authenticated %}
                     <li class="nav-item"><a class="nav-link" href="/fields/my_reservation/">my reservations</a></li>
                         <li class="nav-item"><a class="btn btn-danger" href="/authentification/logout">Logout</a></li>
