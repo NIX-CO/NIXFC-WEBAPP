@@ -16,7 +16,7 @@ def reserver_terrain(request):
             reservation.save()
             message = 'message success'
             reservation_list = Reservation.objects.all()
-            return render(request, 'ListReservation.html', {'form': form, 'reservation': reservation_list, 'message': message})
+            return render(request, 'reservation.html', {'form': form, 'reservation': reservation_list, 'message': message})
         else:
             message = 'Le formulaire n\'est pas valide. Veuillez réessayer.'
     else:
