@@ -1,6 +1,9 @@
 {% extends 'base/base.html' %}
 {% block content %}
 <section id="services">
+  <div class="container my-auto">
+    <div class="col-lg-9 mx-auto  shadow ">
+      <div class="card shadow px-5 py-2">
     <h1>Supprimer un champ</h1>
     <form method="POST">
       {% csrf_token %}
@@ -10,5 +13,6 @@
       </div>
       <button type="submit" class="btn btn-danger">Supprimer</button>
     </form>
+  </div>      </div>      </div>
 </section>
 {% endblock %}
