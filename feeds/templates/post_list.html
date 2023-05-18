@@ -48,7 +48,7 @@
     <a href="/feed/create/" class="btn btn-primary mb-5">Create Post</a
     >
     {% else %}
-    <p>Please <a href="{% url 'login' %}">login</a> to Create a Post.</p>{%endif%} {% for post in posts reversed %}
+    <p class="text-light">Please <a href="{% url 'login' %}">login</a> to Create a Post.</p>{%endif%} {% for post in posts reversed %}
     <div class="card post-card">
       <div class="card-body">
         <h2 class="card-title post-title">{{ post.title }}</h2>
