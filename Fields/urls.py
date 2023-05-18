@@ -12,7 +12,7 @@ urlpatterns = [
     path('search/', views.search, name='search'),
     path('show_reserved_fields/', views.show_reserved_fields, name='show_reserved_fields'),
     path('my_reservation/', views.my_reservation, name='my_reservation'),
-    path('api/search/', views.SearchAPIView.as_view(), name='search'),
-    path('api/reserved-fields/', views.show_reserved_fields, name='reserved-fields'),
-    path('api/my-reservation/', views.my_reservation, name='my-reservation'),
+    path('api/search/', views.SearchAPIView.as_view(), name='search-api'),
+    path('api/reserved-fields/', views.show_reserved_fields, name='reserved-fields-api'),
+    path('api/my-reservation/', views.my_reservation_api, name='my-reservation-api'),
 ]

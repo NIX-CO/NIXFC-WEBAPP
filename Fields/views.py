@@ -94,8 +94,7 @@ def show_reserved_fields(request):
 @login_required
 def my_reservation(request):
     reservations = Reservation.objects.filter(user=request.user)
-    fields = [reservation.field for reservation in reservations]
-    return render(request, 'myReservation.html', {'fields': fields})
+    return render(request, 'myReservation.html', {'reservations': reservations})
 
 
 class SearchAPIView(APIView):
@@ -124,7 +123,7 @@ def show_reserved_fields(request):
 
 @login_required
 @api_view(['GET'])
-def my_reservation(request):
+def my_reservation_api(request):
     reservations = Reservation.objects.filter(user=request.user)
     fields = [reservation.field for reservation in reservations]
     serializer = FieldSerializer(fields, many=True)
