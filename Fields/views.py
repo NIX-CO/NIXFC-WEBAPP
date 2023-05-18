@@ -96,8 +96,7 @@ def my_reservation(request):
     reservations = Reservation.objects.filter(user=request.user)
     fields = [reservation.field for reservation in reservations]
     return render(request, 'myReservation.html', {'fields': fields})
-
-
+    
 class SearchAPIView(APIView):
     @csrf_exempt
     def post(self, request):
